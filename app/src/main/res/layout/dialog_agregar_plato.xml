@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#FAFAFA"
+    android:padding="20dp">
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/text_titulo_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Agregar Nuevo Plato"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#000000" />
+
+    <!-- Subtítulo -->
+    <TextView
+        android:id="@+id/text_subtitulo_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Completa la información del nuevo plato"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Scrollable contenido -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Nombre -->
+            <EditText
+                android:id="@+id/edit_nombre_plato"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre del Plato"
+                android:inputType="textCapWords"
+                android:background="@drawable/bg_input_rounded"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Precio -->
+            <EditText
+                android:id="@+id/edit_precio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Precio"
+                android:background="@drawable/bg_input_rounded"
+                android:inputType="numberDecimal"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Descripción -->
+            <EditText
+                android:id="@+id/edit_descripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Descripción"
+                android:background="@drawable/bg_input_rounded"
+                android:inputType="textMultiLine"
+                android:minLines="3"
+                android:gravity="top"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Categoría -->
+            <Spinner
+                android:id="@+id/spinner_categoria_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input_rounded"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Estado -->
+            <Spinner
+                android:id="@+id/spinner_estado_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input_rounded"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Tiempo de preparación -->
+            <EditText
+                android:id="@+id/edit_tiempo_preparacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tiempo de Preparación (minutos)"
+                android:background="@drawable/bg_input_rounded"
+                android:inputType="number"
+                android:layout_marginBottom="8dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Botones: Cancelar / Agregar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="12dp">
+
+        <Button
+            android:id="@+id/btn_cancelar_plato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#3C3C3C"
+            android:text="Cancelar" />
+
+        <Button
+            android:id="@+id/btn_agregar_plato"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#F4511E"
+            android:text="Agregar"
+            android:layout_marginStart="12dp" />
+    </LinearLayout>
+</LinearLayout>

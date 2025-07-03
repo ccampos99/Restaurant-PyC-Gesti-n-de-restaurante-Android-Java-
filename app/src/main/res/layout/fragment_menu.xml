@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/orange_low_gradient"
+    android:padding="16dp">
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/text_titulo_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gestión del Menú"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Subtítulo -->
+    <TextView
+        android:id="@+id/text_subtitulo_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Administra los platos disponibles en el restaurante"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        app:layout_constraintTop_toBottomOf="@id/text_titulo_menu"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="4dp"/>
+
+    <!-- Buscar platos -->
+
+    <!-- Filtro categoría -->
+
+    <!-- Filtro estado -->
+
+    <!-- Botón Agregar -->
+
+    <!-- Lista de platos -->
+
+    <EditText
+        android:id="@+id/edit_buscar_plato"
+        android:layout_width="362dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="21dp"
+        android:background="@drawable/bg_edit_text"
+        android:hint="Buscar platos..."
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_estado"
+        app:layout_constraintWidth_percent="0.32" />
+
+    <Spinner
+        android:id="@+id/spinner_categoria"
+        android:layout_width="245dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/btn_agregar"
+        app:layout_constraintTop_toBottomOf="@+id/text_subtitulo_menu"
+        app:layout_constraintWidth_percent="0.32" />
+
+    <Spinner
+        android:id="@+id/spinner_estado"
+        android:layout_width="246dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_categoria"
+        app:layout_constraintWidth_percent="0.2" />
+
+    <Button
+        android:id="@+id/btn_agregar"
+        android:layout_width="105dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#F4511E"
+        android:text="Agregar Plato"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_subtitulo_menu"
+        app:layout_constraintWidth_percent="0.16" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_menu"
+        android:layout_width="363dp"
+        android:layout_height="499dp"
+        android:layout_marginBottom="16dp"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
