@@ -43,41 +43,15 @@ public class MenuFragment extends Fragment {
         listaCompleta.add(new Plato("Gazpacho Andaluz", "Sopa fría de tomate con verduras frescas", "Entrantes", 8.0, "Disponible", 5));
         listaCompleta.add(new Plato("Tarta de Santiago", "Tarta tradicional gallega de almendra", "Postres", 6.5, "Temporada", 10));
         listaCompleta.add(new Plato("Pulpo a la Gallega", "Pulpo cocido con patatas, pimentón y aceite de oliva", "Entrantes", 14.0, "No Disponible", 15));
-        EditText inputBuscar = view.findViewById(R.id.edit_buscar_plato);
-        adapter = new MenuAdapter(listaCompleta,
-                plato -> {
-                    // Abrir diálogo de edición
-                    EditarPlatoDialogFragment dialog = new EditarPlatoDialogFragment(plato);
-                    dialog.setOnPlatoEditadoListener(actualizado -> {
-                        int index = listaCompleta.indexOf(plato);
-                        if (index != -1) {
-                            listaCompleta.set(index, actualizado);
-                            filtrarPlatos(inputBuscar.getText().toString());
-                        }
-                    });
-                    dialog.show(getParentFragmentManager(), "EditarPlatoDialog");
-                },
-                plato -> {
-                    // Confirmación de eliminación
-                    new android.app.AlertDialog.Builder(requireContext())
-                            .setTitle("Eliminar Plato")
-                            .setMessage("¿Deseas eliminar el plato: " + plato.nombre + "?")
-                            .setPositiveButton("Eliminar", (dialog, which) -> {
-                                listaCompleta.remove(plato);
-                                filtrarPlatos(inputBuscar.getText().toString());
-                            })
-                            .setNegativeButton("Cancelar", null)
-                            .show();
-                }
-        );
 
+        adapter = new MenuAdapter(listaCompleta);
         recyclerView.setAdapter(adapter);
 
 
 
         Spinner spinnerCategoria = view.findViewById(R.id.spinner_categoria);
         Spinner spinnerEstado = view.findViewById(R.id.spinner_estado);
-
+        EditText inputBuscar = view.findViewById(R.id.edit_buscar_plato);
 
         List<String> categorias = Arrays.asList("Todas las categorias", "Platos Principales", "Entrantes", "Postres");
         List<String> estados = Arrays.asList("Todos los estados", "Disponible", "Temporada", "No Disponible");
