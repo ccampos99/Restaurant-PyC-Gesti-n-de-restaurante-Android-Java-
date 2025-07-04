@@ -1,0 +1,84 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_card_rounded"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/text_titulo_reabastecer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reabastecer Ingrediente"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/text_stock_actual"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stock actual: 0"
+        android:textColor="#555"
+        android:layout_marginBottom="12dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cantidad a agregar (kg)"
+        android:textColor="#333"
+        android:layout_marginBottom="4dp" />
+
+    <Spinner
+        android:id="@+id/spinner_cantidad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_input_rounded"
+        android:layout_marginBottom="12dp" />
+
+    <TextView
+        android:id="@+id/text_resultado_stock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stock después del reabastecimiento:"
+        android:textColor="#666"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/text_costo_estimado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Costo estimado: $0.00"
+        android:textColor="#666" />
+
+    <!-- Botones al pie -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/btn_cancelar_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#000000"
+
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp" />
+
+        <Button
+            android:id="@+id/btn_reabastecer_dialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reabastecer"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#2962FF"
+            android:layout_marginStart="12dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="8dp" />
+    </LinearLayout>
+</LinearLayout>

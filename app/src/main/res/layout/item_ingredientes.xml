@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="6dp"
+    android:layout_marginHorizontal="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- Nombre del ingrediente -->
+        <TextView
+            android:id="@+id/text_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tomate"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <!-- Stock y estado -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/text_stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="25 kg (mínimo 10 kg)"
+                android:textSize="13sp"
+                android:textColor="#444444" />
+
+            <TextView
+                android:id="@+id/text_estado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="En Stock"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_estado_ok"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <!-- Proveedor y costo -->
+        <TextView
+            android:id="@+id/text_proveedor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Proveedor: Verduras Frescas SA"
+            android:textSize="13sp"
+            android:textColor="#555555" />
+
+        <TextView
+            android:id="@+id/text_costo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Costo/U: $2.50"
+            android:textSize="13sp"
+            android:textColor="#555555" />
+
+        <!-- Fecha última reposición -->
+        <TextView
+            android:id="@+id/text_fecha_reposicion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Última reposición: 2024-01-15"
+            android:textSize="12sp"
+            android:textColor="#999999"
+            android:layout_marginTop="2dp" />
+
+        <!-- Acciones -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <ImageButton
+                android:id="@+id/btn_editar"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_edit"
+                android:scaleType="centerInside"
+                android:background="@drawable/bg_icon_neutral"
+                android:contentDescription="Editar"
+                android:padding="6dp"
+                app:tint="#000000" />
+
+            <ImageButton
+                android:id="@+id/btn_comprar"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_cart"
+                android:scaleType="centerInside"
+                android:background="@drawable/bg_icon_cart"
+                android:contentDescription="Comprar"
+                android:padding="6dp"
+                app:tint="#FFFFFF" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
