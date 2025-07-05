@@ -41,12 +41,16 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        cardWaiter.setOnClickListener(v ->
-                Toast.makeText(MainActivity.this, "Mesero seleccionado", Toast.LENGTH_SHORT).show()
-        );
+        cardWaiter.setOnClickListener(v -> {
+                Toast.makeText(MainActivity.this, "Mesero seleccionado", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, com.peter.restauranteproyecto.waiter.WaiterActivity.class);
+                startActivity(intent);
+        });
 
-        cardCashier.setOnClickListener(v ->
-                Toast.makeText(MainActivity.this, "Cajero seleccionado", Toast.LENGTH_SHORT).show()
-        );
+        cardCashier.setOnClickListener(v -> {
+            Toast.makeText(MainActivity.this, "Cajero seleccionado", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, com.peter.restauranteproyecto.cashier.CashierActivity.class);
+            startActivity(intent);
+        });
     }
 }

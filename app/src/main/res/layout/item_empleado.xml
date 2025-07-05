@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="6dp"
+    android:layout_marginHorizontal="6dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- Acciones (Editar, Eliminar, Estado) -->
+        <LinearLayout
+            android:id="@+id/layout_acciones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageButton
+                android:id="@+id/btn_editar"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_edit"
+                android:contentDescription="Editar"
+                android:padding="6dp"
+                android:background="@drawable/bg_icon_neutral"
+                android:scaleType="centerInside"
+                app:tint="#000000" />
+
+            <ImageButton
+                android:id="@+id/btn_eliminar"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_delete"
+                android:contentDescription="Eliminar"
+                android:padding="6dp"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/bg_icon_danger"
+                android:scaleType="centerInside"
+                app:tint="#FF0000" />
+
+            <Button
+                android:id="@+id/btn_estado"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Activar"
+                android:textSize="13sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="6dp"
+                android:backgroundTint="#4CAF50" />
+        </LinearLayout>
+
+        <!-- Nombre -->
+        <TextView
+            android:id="@+id/text_nombre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="María García"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/layout_acciones"
+            app:layout_constraintHorizontal_bias="0" />
+
+        <!-- Fecha de ingreso -->
+        <TextView
+            android:id="@+id/text_fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Desde: 2023-03-15"
+            android:textSize="12sp"
+            android:textColor="#888888"
+            app:layout_constraintTop_toBottomOf="@id/text_nombre"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Rol -->
+
+        <!-- Estado -->
+
+        <TextView
+            android:id="@+id/text_rol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_estado_disponible"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="2dp"
+            android:text="Mesero"
+            android:textColor="#2563EB"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_turno" />
+
+        <TextView
+            android:id="@+id/text_estado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activo"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="#000000"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:background="@drawable/bg_estado_activo"
+            app:layout_constraintTop_toBottomOf="@id/layout_acciones"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="6dp" />
+
+        <!-- Turno -->
+        <TextView
+            android:id="@+id/text_turno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tarde"
+            android:textSize="12sp"
+            android:textColor="#333"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="2dp"
+            android:background="@drawable/bg_estado_libre"
+            app:layout_constraintTop_toBottomOf="@id/text_estado"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp" />
+
+        <!-- Horario semanal -->
+        <LinearLayout
+            android:id="@+id/layout_horario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="6dp"
+            app:layout_constraintTop_toBottomOf="@id/text_turno"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Email -->
+        <TextView
+            android:id="@+id/text_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📧 maria.garcia@restaurant.com"
+            android:textSize="13sp"
+            android:textColor="#000"
+            app:layout_constraintTop_toBottomOf="@id/text_fecha"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="6dp" />
+
+        <!-- Teléfono -->
+        <TextView
+            android:id="@+id/text_telefono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📞 +34 612 345 678"
+            android:textSize="13sp"
+            android:textColor="#000"
+            app:layout_constraintTop_toBottomOf="@id/text_email"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Rendimiento -->
+        <TextView
+            android:id="@+id/text_rendimiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="★★★★★ (4.5)"
+            android:textColor="#FFA000"
+            android:textSize="13sp"
+            app:layout_constraintTop_toBottomOf="@id/text_telefono"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp" />
+
+        <!-- Salario -->
+        <TextView
+            android:id="@+id/text_salario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="€1,800"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/text_rendimiento"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="4dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

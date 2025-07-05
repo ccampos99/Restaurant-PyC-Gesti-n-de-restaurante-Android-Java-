@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_card_rounded"
+    android:padding="20dp">
+
+    <!-- TÍTULO -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nueva Reserva"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#000000" />
+
+    <!-- SUBTÍTULO -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Completa los datos de la reserva"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:layout_marginBottom="12dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Cliente -->
+            <EditText
+                android:id="@+id/input_cliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre del Cliente"
+                android:inputType="textPersonName"
+                android:background="@drawable/bg_input_rounded"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Mesa -->
+            <EditText
+                android:id="@+id/input_mesa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mesa (opcional)"
+                android:inputType="text"
+                android:background="@drawable/bg_input_rounded"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Comensales -->
+            <EditText
+                android:id="@+id/input_comensales"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Número de Comensales"
+                android:inputType="number"
+                android:background="@drawable/bg_input_rounded"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Mesero -->
+            <Spinner
+                android:id="@+id/spinner_mesero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input_rounded"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Fecha -->
+            <DatePicker
+                android:id="@+id/date_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:calendarViewShown="true" />
+
+            <!-- Hora -->
+            <TimePicker
+                android:id="@+id/time_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:timePickerMode="spinner" />
+
+            <!-- Solicitudes -->
+            <EditText
+                android:id="@+id/input_solicitudes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Solicitudes especiales"
+                android:inputType="textMultiLine"
+                android:background="@drawable/bg_input_rounded"
+                android:minLines="2"
+                android:gravity="top"
+                android:layout_marginBottom="8dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- BOTONES -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="12dp">
+
+        <Button
+            android:id="@+id/btn_cancelar_reserva"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:backgroundTint="#3C3C3C"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btn_guardar_reserva"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guardar"
+            android:backgroundTint="#1E40AF"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="12dp" />
+    </LinearLayout>
+</LinearLayout>

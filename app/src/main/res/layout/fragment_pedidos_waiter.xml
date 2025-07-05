@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blue_low_gradient"
+    android:padding="16dp">
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/titulo_pedidos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Pedidos del Salón"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Subtítulo -->
+    <TextView
+        android:id="@+id/subtitulo_pedidos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Gestiona los pedidos de tus mesas asignadas"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/titulo_pedidos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Filtro Estado -->
+    <Spinner
+        android:id="@+id/spinner_estado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/subtitulo_pedidos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/spinner_prioridad"
+        app:layout_constraintWidth_percent="0.48"
+        android:layout_marginTop="12dp" />
+
+    <!-- Filtro Prioridad -->
+    <Spinner
+        android:id="@+id/spinner_prioridad"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/subtitulo_pedidos"
+        app:layout_constraintStart_toEndOf="@id/spinner_estado"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.48" />
+
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_pedidos"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/spinner_estado"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Botón flotante para nuevo pedido -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_nuevo_pedido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:contentDescription="Nuevo Pedido"
+        android:src="@android:drawable/ic_input_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@color/waiter_primary"
+        app:tint="#FFF0E8"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

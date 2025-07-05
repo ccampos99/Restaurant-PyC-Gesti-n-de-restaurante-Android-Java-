@@ -9,4 +9,13 @@
     <color name="tab_unselected">#BDBDBD</color> <!-- Gris clarito para tab no seleccionado -->
     <color name="ripple_color">#FFFFF0</color>
 
+    <color name="waiter_primary">#2563EB</color>      <!-- Azul medio -->
+    <color name="waiter_secondary">#1E40AF</color>    <!-- Azul oscuro -->
+    <color name="waiter_background">#DBEAFE</color>   <!-- Azul claro -->
+
+    <!-- Colores para TabLayout en módulo waiter -->
+    <color name="waiter_tab_selected">#2563EB</color>
+    <color name="waiter_tab_unselected">#90A4AE</color> <!-- Gris azulado sutil -->
+    <color name="waiter_ripple_color">#CCE0FF</color>  <!-- Azul muy suave para ripple -->
+
 </resources>

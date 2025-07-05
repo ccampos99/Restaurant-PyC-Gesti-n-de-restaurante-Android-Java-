@@ -2,18 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@drawable/orange_low_gradient">
+    android:background="@drawable/blue_low_gradient">
 
     <!-- TÍTULO -->
     <TextView
-        android:id="@+id/text_titulo_proveedores"
+        android:id="@+id/text_titulo_reservas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Gestión de Proveedores"
+        android:text="Reservas del Salón"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#000000"
@@ -22,38 +21,27 @@
 
     <!-- SUBTÍTULO -->
     <TextView
-        android:id="@+id/text_subtitulo_proveedores"
+        android:id="@+id/text_subtitulo_reservas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Administra la información de tus proveedores"
+        android:text="Gestiona las reservas de tus mesas asignadas"
         android:textSize="14sp"
         android:textColor="#666666"
-        app:layout_constraintTop_toBottomOf="@id/text_titulo_proveedores"
+        app:layout_constraintTop_toBottomOf="@id/text_titulo_reservas"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="4dp" />
 
-    <!-- BOTÓN AGREGAR -->
+    <!-- BOTÓN AGREGAR RESERVA -->
     <Button
-        android:id="@+id/btn_agregar_proveedor"
+        android:id="@+id/btn_agregar_reserva"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:text="Agregar Proveedor"
-        android:backgroundTint="#7C3AED"
+        android:text="Nueva Reserva"
+        android:backgroundTint="#1E40AF"
         android:textColor="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@id/text_subtitulo_proveedores"
+        app:layout_constraintTop_toBottomOf="@id/text_subtitulo_reservas"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp" />
-
-    <!-- SPINNER CATEGORÍA -->
-    <Spinner
-        android:id="@+id/spinner_categoria"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_agregar_proveedor"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/spinner_estado"
-        app:layout_constraintWidth_percent="0.5" />
 
     <!-- SPINNER ESTADO -->
     <Spinner
@@ -61,22 +49,47 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_agregar_proveedor"
-        app:layout_constraintStart_toEndOf="@id/spinner_categoria"
+        app:layout_constraintTop_toBottomOf="@id/btn_agregar_reserva"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_fecha"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <!-- SPINNER FECHA -->
+    <Spinner
+        android:id="@+id/spinner_fecha"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_agregar_reserva"
+        app:layout_constraintStart_toEndOf="@id/spinner_estado"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.5" />
 
-    <!-- RECYCLER VIEW -->
+    <!-- BÚSQUEDA -->
+    <EditText
+        android:id="@+id/edit_buscar_reserva"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:hint="Buscar reserva por cliente..."
+        android:background="@drawable/bg_edit_text"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
+        app:layout_constraintTop_toBottomOf="@id/spinner_estado"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- LISTA DE RESERVAS -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_proveedores"
-        android:layout_width="374dp"
-        android:layout_height="538dp"
+        android:id="@+id/recycler_reservas"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:clipToPadding="false"
         android:paddingTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/edit_buscar_reserva"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner_categoria" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

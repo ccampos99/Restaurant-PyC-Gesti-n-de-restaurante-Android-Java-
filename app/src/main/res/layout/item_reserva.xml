@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="6dp"
+    android:layout_marginVertical="6dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- Código de reserva -->
+        <TextView
+            android:id="@+id/text_codigo_reserva"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="RES-001"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/layout_acciones"
+            app:layout_constraintHorizontal_bias="0" />
+
+        <!-- Fecha y hora -->
+        <TextView
+            android:id="@+id/text_fecha_hora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2024-01-18 20:00"
+            android:textSize="12sp"
+            android:textColor="#666666"
+            app:layout_constraintTop_toBottomOf="@id/text_codigo_reserva"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Cliente -->
+        <TextView
+            android:id="@+id/text_cliente"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Carlos Mendoza"
+            android:textStyle="bold"
+            android:textColor="#1E40AF"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/text_fecha_hora"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp" />
+
+        <!-- Mesa y comensales -->
+        <TextView
+            android:id="@+id/text_mesa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mesa 3"
+            android:textSize="13sp"
+            android:textColor="#444444"
+            app:layout_constraintTop_toBottomOf="@id/text_cliente"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="2dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toEndOf="@id/text_mesa"
+            app:layout_constraintTop_toTopOf="@id/text_mesa">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_capacidad"
+                android:contentDescription="Capacidad"
+                app:tint="#444444" />
+
+            <TextView
+                android:id="@+id/text_comensales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                android:textSize="13sp"
+                android:textColor="#444444"
+                android:layout_marginStart="4dp" />
+        </LinearLayout>
+        <!-- Estado -->
+        <TextView
+            android:id="@+id/text_estado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pendiente"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:background="@drawable/bg_estado_pendiente"
+            android:textColor="#000000"
+            app:layout_constraintTop_toTopOf="@id/text_mesa"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Solicitudes -->
+        <TextView
+            android:id="@+id/text_solicitudes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Aniversario de bodas"
+            android:textSize="13sp"
+            android:textColor="#555555"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@id/text_mesa"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Layout de acciones -->
+        <LinearLayout
+            android:id="@+id/layout_acciones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/text_solicitudes"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <Button
+                android:id="@+id/btn_confirmar"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Confirmar"
+                android:backgroundTint="#2E7D32"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_cancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Cancelar"
+                android:layout_marginStart="6dp"
+                android:backgroundTint="#D32F2F"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_completar"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="Completar"
+                android:backgroundTint="#1976D2"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_no_asistio"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="No Asistió"
+                android:layout_marginStart="6dp"
+                android:backgroundTint="#757575"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:visibility="gone" />
+
+            <ImageButton
+                android:id="@+id/btn_editar_reserva"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_edit"
+                android:background="@drawable/bg_icon_neutral"
+                android:contentDescription="Editar"
+                android:layout_marginStart="8dp"
+                android:padding="6dp"
+                app:tint="#000000" />
+
+            <ImageButton
+                android:id="@+id/btn_eliminar_reserva"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_delete"
+                android:background="@drawable/bg_icon_danger"
+                android:contentDescription="Eliminar"
+                android:layout_marginStart="6dp"
+                android:padding="6dp"
+                app:tint="#AD0000" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -62,9 +62,10 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
+                android:id="@+id/text_pedidos_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="12"
+                android:text="00"
                 android:textSize="24sp"
                 android:textColor="#E65100"
                 android:textStyle="bold"
@@ -125,9 +126,10 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
+                android:id="@+id/text_ingredientes_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5"
+                android:text="00"
                 android:textSize="24sp"
                 android:textColor="#D32F2F"
                 android:textStyle="bold"
@@ -188,9 +190,10 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
+                android:id="@+id/text_menu_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="45"
+                android:text="00"
                 android:textSize="24sp"
                 android:textColor="#1976D2"
                 android:textStyle="bold"
@@ -251,9 +254,10 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
+                android:id="@+id/text_proveedores_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="8"
+                android:text="00"
                 android:textSize="24sp"
                 android:textColor="#388E3C"
                 android:textStyle="bold"

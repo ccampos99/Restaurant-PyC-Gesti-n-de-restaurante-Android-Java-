@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_card_rounded"
+    android:padding="20dp">
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/text_titulo_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Agregar Nuevo Proveedor"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#000000" />
+
+    <!-- Subtítulo -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Completa la información del nuevo proveedor"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Contenido Scrollable -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Nombre y Categoría -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <EditText
+                    android:id="@+id/input_nombre"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Nombre del Proveedor"
+                    android:background="@drawable/bg_input_rounded"
+                    android:layout_marginEnd="8dp" />
+
+                <Spinner
+                    android:id="@+id/spinner_categoria"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_input_rounded" />
+            </LinearLayout>
+
+            <!-- Teléfono y Email -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <EditText
+                    android:id="@+id/input_telefono"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Teléfono"
+                    android:inputType="phone"
+                    android:background="@drawable/bg_input_rounded"
+                    android:layout_marginEnd="8dp" />
+
+                <EditText
+                    android:id="@+id/input_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:background="@drawable/bg_input_rounded" />
+            </LinearLayout>
+
+            <!-- Dirección -->
+            <EditText
+                android:id="@+id/input_direccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Dirección"
+                android:inputType="textPostalAddress"
+                android:background="@drawable/bg_input_rounded"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Calificación / Estado / Tiempo Entrega -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <Spinner
+                    android:id="@+id/spinner_calificacion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_input_rounded"
+                    android:layout_marginEnd="6dp" />
+
+                <Spinner
+                    android:id="@+id/spinner_estado"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_input_rounded"
+                    android:layout_marginEnd="6dp" />
+
+                <EditText
+                    android:id="@+id/input_entrega"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Entrega (h)"
+                    android:inputType="number"
+                    android:background="@drawable/bg_input_rounded" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Botones -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="12dp">
+
+        <Button
+            android:id="@+id/btn_cancelar_proveedor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancelar"
+            android:backgroundTint="#3C3C3C"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btn_agregar_proveedor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agregar"
+            android:backgroundTint="#6200EE"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="12dp" />
+    </LinearLayout>
+</LinearLayout>

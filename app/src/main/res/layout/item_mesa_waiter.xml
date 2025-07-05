@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="6dp"
+    android:layout_marginHorizontal="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- Nombre de mesa -->
+        <TextView
+            android:id="@+id/text_mesa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mesa 1"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <!-- Capacidad con ícono -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_capacidad"
+                android:layout_marginEnd="4dp"
+                app:tint="#444444" />
+
+            <TextView
+                android:id="@+id/text_capacidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4"
+                android:textColor="#444444"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Estado -->
+        <TextView
+            android:id="@+id/text_estado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Ocupada"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/bg_estado_ocupada"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <!-- Mesero -->
+        <TextView
+            android:id="@+id/text_mesero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="María García"
+            android:textColor="#666666"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
+
+        <!-- Clientes -->
+        <TextView
+            android:id="@+id/text_clientes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3/4"
+            android:textColor="#444444"
+            android:textSize="14sp"
+            android:layout_marginTop="2dp" />
+
+        <!-- Info extra -->
+        <TextView
+            android:id="@+id/text_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pedido: 14:30"
+            android:textColor="#888888"
+            android:textSize="12sp"
+            android:layout_marginTop="2dp" />
+
+        <!-- Botones -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp">
+
+            <Button
+                android:id="@+id/btn_accion1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Acción 1"
+                android:textColor="#FFFFFF"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="#2563EB" />
+
+            <Button
+                android:id="@+id/btn_accion2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Acción 2"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#F4511E" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

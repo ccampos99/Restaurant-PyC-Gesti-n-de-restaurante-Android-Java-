@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_card_rounded"
+    android:padding="20dp">
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/text_titulo_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Agregar Nuevo Pedido"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#000000" />
+
+    <!-- Subtítulo -->
+    <TextView
+        android:id="@+id/text_subtitulo_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Completa la información del pedido"
+        android:textSize="14sp"
+        android:textColor="#666666"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Scroll del contenido -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Mesa -->
+            <EditText
+                android:id="@+id/input_mesa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mesa"
+                android:background="@drawable/bg_input_rounded"
+                android:inputType="textCapWords"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Artículos: selector + botón + lista -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <Spinner
+                    android:id="@+id/spinner_platos"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_input_rounded" />
+
+                <ImageButton
+                    android:id="@+id/btn_agregar_articulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_input_add"
+                    android:contentDescription="Agregar artículo"
+                    android:background="@android:color/transparent"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+
+            <!-- Lista de artículos seleccionados -->
+            <TextView
+                android:id="@+id/text_articulos_agregados"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#444444"
+                android:textSize="14sp"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Total -->
+            <EditText
+                android:id="@+id/input_total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Total"
+                android:background="@drawable/bg_input_rounded"
+                android:inputType="numberDecimal"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Mesero -->
+            <Spinner
+                android:id="@+id/spinner_mesero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input_rounded"
+                android:layout_marginBottom="8dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Botones: Cancelar / Agregar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="12dp">
+
+        <Button
+            android:id="@+id/btn_cancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#3C3C3C"
+            android:text="Cancelar" />
+
+        <Button
+            android:id="@+id/btn_guardar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#1E88E5"
+            android:text="Guardar"
+            android:layout_marginStart="12dp" />
+    </LinearLayout>
+</LinearLayout>
