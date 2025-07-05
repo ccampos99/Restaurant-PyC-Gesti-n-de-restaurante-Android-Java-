@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.peter.restauranteproyecto.R;
+import com.peter.restauranteproyecto.common.data.DatabaseHelper;
 import com.peter.restauranteproyecto.common.model.Pedido;
 
 import java.util.List;
@@ -52,19 +53,30 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
         holder.btnAccion.setVisibility(accion.equals("Acción") ? View.GONE : View.VISIBLE);
 
         holder.btnAccion.setOnClickListener(v -> {
+            String nuevoEstado = "";
             switch (pedido.getEstado().toLowerCase()) {
                 case "pendiente":
-                    pedido.setEstado("Preparando");
+                    nuevoEstado = "Preparando";
                     break;
                 case "preparando":
-                    pedido.setEstado("Listo");
+                    nuevoEstado = "Listo";
                     break;
                 case "listo":
-                    pedido.setEstado("Servido");
+                    nuevoEstado = "Servido";
                     break;
             }
-            notifyItemChanged(position);
+
+            if (!nuevoEstado.isEmpty()) {
+                pedido.setEstado(nuevoEstado);
+
+
+                DatabaseHelper db = new DatabaseHelper(holder.itemView.getContext());
+                db.actualizarEstadoPedido(pedido.getId(), nuevoEstado);
+
+                notifyItemChanged(position);
+            }
         });
+
     }
 
     @Override

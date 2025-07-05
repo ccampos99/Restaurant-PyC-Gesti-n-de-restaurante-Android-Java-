@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.peter.restauranteproyecto.R;
+import com.peter.restauranteproyecto.common.data.DatabaseHelper;
 import com.peter.restauranteproyecto.common.model.Mesa;
 
 import java.util.List;
@@ -15,9 +16,11 @@ import java.util.List;
 public class MesaAdapter extends RecyclerView.Adapter<MesaAdapter.MesaViewHolder> {
 
     private final List<Mesa> mesas;
+    private final DatabaseHelper dbHelper;
 
-    public MesaAdapter(List<Mesa> mesas) {
+    public MesaAdapter(List<Mesa> mesas, DatabaseHelper dbHelper) {
         this.mesas = mesas;
+        this.dbHelper = dbHelper;
     }
 
     @NonNull
@@ -40,15 +43,17 @@ public class MesaAdapter extends RecyclerView.Adapter<MesaAdapter.MesaViewHolder
 
         holder.textEstado.setBackgroundResource(getBackgroundEstado(mesa.getEstado().toLowerCase()));
 
-        // Ejemplo de lógica para botones
+        holder.btnAccion1.setVisibility(View.VISIBLE);
+        holder.btnAccion2.setVisibility(View.GONE); // Ocultar siempre al inicio
+
         switch (mesa.getEstado().toLowerCase()) {
             case "ocupada":
                 holder.btnAccion1.setText("Liberar");
-                holder.btnAccion2.setVisibility(View.GONE);
+                holder.btnAccion2.setVisibility(View.GONE); // Refuerzo
                 break;
             case "limpieza":
                 holder.btnAccion1.setText("Listo");
-                holder.btnAccion2.setVisibility(View.GONE);
+                holder.btnAccion2.setVisibility(View.GONE); // Refuerzo
                 break;
             case "libre":
                 holder.btnAccion1.setText("Asignar");
@@ -60,38 +65,46 @@ public class MesaAdapter extends RecyclerView.Adapter<MesaAdapter.MesaViewHolder
                 holder.btnAccion2.setText("Cancelar");
                 holder.btnAccion2.setVisibility(View.VISIBLE);
                 break;
+            default:
+                holder.btnAccion1.setVisibility(View.GONE);
+                holder.btnAccion2.setVisibility(View.GONE);
+                break;
         }
+
 
         holder.btnAccion1.setOnClickListener(v -> {
             switch (mesa.getEstado().toLowerCase()) {
                 case "ocupada":
-                    mesa.setEstado("limpieza"); // Liberar pasa a limpieza
+                    mesa.setEstado("Limpieza");
                     break;
                 case "limpieza":
-                    mesa.setEstado("libre"); // Listo pasa a libre
+                    mesa.setEstado("Libre");
                     break;
                 case "libre":
-                    mesa.setEstado("ocupada"); // Asignar pasa a ocupada
+                    mesa.setEstado("Ocupada");
                     break;
                 case "reservada":
-                    mesa.setEstado("ocupada"); // Confirmar pasa a ocupada
+                    mesa.setEstado("Ocupada");
                     break;
             }
+            dbHelper.actualizarEstadoMesa(mesa.getNombre(), mesa.getEstado());
             notifyItemChanged(position);
         });
 
         holder.btnAccion2.setOnClickListener(v -> {
             switch (mesa.getEstado().toLowerCase()) {
                 case "libre":
-                    mesa.setEstado("reservada"); // Reservar pasa a reservada
+                    mesa.setEstado("Reservada");
                     break;
                 case "reservada":
-                    mesa.setEstado("libre"); // Cancelar pasa a libre
+                    mesa.setEstado("Libre");
                     break;
             }
+            dbHelper.actualizarEstadoMesa(mesa.getNombre(), mesa.getEstado());
             notifyItemChanged(position);
         });
     }
+
 
     @Override
     public int getItemCount() {
@@ -109,8 +122,8 @@ public class MesaAdapter extends RecyclerView.Adapter<MesaAdapter.MesaViewHolder
     }
 
     public void actualizarLista(List<Mesa> nuevasMesas) {
-        this.mesas.clear();
-        this.mesas.addAll(nuevasMesas);
+        mesas.clear();
+        mesas.addAll(nuevasMesas);
         notifyDataSetChanged();
     }
 

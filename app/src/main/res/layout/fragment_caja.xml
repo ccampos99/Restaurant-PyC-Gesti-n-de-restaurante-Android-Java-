@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blue_low_gradient"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/blue_low_gradient">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:spacing="8dp">
+        android:gravity="center_horizontal">
 
         <!-- TÍTULO -->
         <TextView
@@ -21,15 +19,94 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#000000"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 🧾 LISTA DE PEDIDOS A PAGAR -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pedidos por pagar"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_pedidos_caja"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 💵 BOTÓN DE CIERRE -->
+        <Button
+            android:id="@+id/btn_cierre_caja"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cierre de Caja"
+            android:backgroundTint="#6200EE"
+            android:textColor="#FFFFFF"
             android:layout_marginBottom="12dp" />
 
-        <!-- TARJETAS DE RESUMEN -->
-        <include layout="@layout/item_resumen" android:id="@+id/card_reservas" />
-        <include layout="@layout/item_resumen" android:id="@+id/card_pedidos" />
-        <include layout="@layout/item_resumen" android:id="@+id/card_platos" />
-        <include layout="@layout/item_resumen" android:id="@+id/card_proveedores" />
-        <include layout="@layout/item_resumen" android:id="@+id/card_ingredientes" />
-        <include layout="@layout/item_resumen" android:id="@+id/card_empleados" />
+        <!-- 📊 RESUMEN CIERRE -->
+        <LinearLayout
+            android:id="@+id/layout_resumen_cierre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:padding="12dp"
+            android:background="@drawable/bg_white_rounded"
+            android:elevation="4dp">
+
+            <TextView
+                android:id="@+id/txt_total_boletas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total de boletas: 0"
+                android:textSize="16sp"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/txt_importe_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Importe total del día: S/ 0.00"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp" />
+
+            <Button
+                android:id="@+id/btn_generar_cierre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Generar Cierre"
+                android:backgroundTint="#03DAC5"
+                android:textColor="#000000" />
+        </LinearLayout>
+<!--        <Button-->
+<!--            android:id="@+id/btn_ir_historial"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Ver historial de cierres"-->
+<!--            android:layout_marginTop="12dp" />-->
+
+        <!-- 🕘 Historial de cierres (invisible al inicio) -->
+        <TextView
+            android:id="@+id/txt_historial_titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Historial de Cierres"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/txt_historial_contenido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            android:textColor="#000000" />
+
 
     </LinearLayout>
 </ScrollView>

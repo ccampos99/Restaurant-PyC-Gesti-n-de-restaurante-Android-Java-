@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.peter.restauranteproyecto.common.model.Mesa;
 import com.peter.restauranteproyecto.common.model.Pedido;
 import com.peter.restauranteproyecto.common.model.Reserva;
 
@@ -46,7 +47,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "estado TEXT," +
                 "solicitudes TEXT," +
                 "mesero TEXT)");
-  }
+        db.execSQL("CREATE TABLE IF NOT EXISTS CierreCaja (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "total_boletas INTEGER, " +
+                "importe_total REAL, " +
+                "fecha TEXT)");
+
+    }
 
 
 
@@ -121,22 +128,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // ====== PEDIDOS ======
 
-    public void insertarPedido(Pedido pedido) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("id", pedido.getId());
-        values.put("mesa", pedido.getMesa());
-        values.put("articulos", new Gson().toJson(pedido.getArticulos()));
-        values.put("estado", pedido.getEstado());
-        values.put("horaPedido", pedido.getHoraPedido());
-        values.put("estimado", pedido.getEstimado());
-        values.put("total", pedido.getTotal());
-        values.put("prioridad", pedido.getPrioridad());
-        values.put("mesero", pedido.getMesero());
-
-        db.insert("Pedido", null, values);
-        db.close();
-    }
 
     public List<Pedido> obtenerTodosLosPedidos() {
         List<Pedido> lista = new ArrayList<>();
@@ -179,6 +170,127 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete("Pedido", "id = ?", new String[]{idPedido});
         db.close();
+    }
+
+    //MESAS
+    public void insertarPedido(Pedido pedido) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Insertar el pedido
+        ContentValues pedidoValues = new ContentValues();
+        pedidoValues.put("id", pedido.getId());
+        pedidoValues.put("mesa", pedido.getMesa());
+        pedidoValues.put("articulos", new Gson().toJson(pedido.getArticulos()));
+        pedidoValues.put("estado", pedido.getEstado());
+        pedidoValues.put("horaPedido", pedido.getHoraPedido());
+        pedidoValues.put("estimado", pedido.getEstimado());
+        pedidoValues.put("total", pedido.getTotal());
+        pedidoValues.put("prioridad", pedido.getPrioridad());
+        pedidoValues.put("mesero", pedido.getMesero());
+
+        db.insert("Pedido", null, pedidoValues);
+
+        String nombreMesa = pedido.getMesa().replaceAll("[^0-9]", "");
+        Mesa mesa = new Mesa(
+                nombreMesa,
+                0,
+                "Ocupada",
+                pedido.getMesero(),
+                "",
+                "Pedido: " + pedido.getHoraPedido()
+        );
+        insertarOModificarMesa(mesa);
+
+        db.close();
+    }
+
+
+
+
+    public List<Mesa> obtenerTodasLasMesas() {
+        List<Mesa> lista = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM Mesa", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Mesa mesa = new Mesa(
+                        cursor.getString(cursor.getColumnIndexOrThrow("nombre")),
+                        cursor.getInt(cursor.getColumnIndexOrThrow("capacidad")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("estado")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("mesero")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("clientes")),
+                        cursor.getString(cursor.getColumnIndexOrThrow("informacion"))
+                );
+                lista.add(mesa);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return lista;
+    }
+    public void actualizarEstadoMesa(String nombreMesa, String nuevoEstado) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("estado", nuevoEstado);
+        db.update("Mesa", values, "nombre = ?", new String[]{nombreMesa});
+        db.close();
+    }
+    public void insertarOModificarMesa(Mesa mesa) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("nombre", mesa.getNombre());
+        values.put("capacidad", mesa.getCapacidad());
+        values.put("estado", mesa.getEstado());
+        values.put("mesero", mesa.getMesero());
+        values.put("clientes", mesa.getClientes());
+        values.put("informacion", mesa.getInformacion());
+
+        db.insertWithOnConflict("Mesa", null, values, SQLiteDatabase.CONFLICT_REPLACE);
+        db.close();
+    }
+
+    public void eliminarMesasConPrefijoMesa() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("Mesa", "nombre LIKE 'Mesa %'", null);
+        db.close();
+
+    }
+
+    public void limpiarMesasInconsistentes() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM Mesa WHERE nombre LIKE 'Mesa %'");  // elimina "Mesa 4", "Mesa 5", etc.
+        db.close();
+    }
+    // CAJA
+    public void insertarCierreCaja(int totalBoletas, double importeTotal, String fecha) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("total_boletas", totalBoletas);
+        values.put("importe_total", importeTotal);
+        values.put("fecha", fecha);
+        db.insert("CierreCaja", null, values);
+        db.close();
+    }
+
+    public List<String> obtenerHistorialCierres() {
+        List<String> historial = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM CierreCaja ORDER BY id DESC", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                String resumen = "📅 Fecha: " + cursor.getString(cursor.getColumnIndexOrThrow("fecha")) +
+                        " | 🧾 Boletas: " + cursor.getInt(cursor.getColumnIndexOrThrow("total_boletas")) +
+                        " | 💰 Total: S/ " + String.format("%.2f", cursor.getDouble(cursor.getColumnIndexOrThrow("importe_total")));
+                historial.add(resumen);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return historial;
     }
 
 
