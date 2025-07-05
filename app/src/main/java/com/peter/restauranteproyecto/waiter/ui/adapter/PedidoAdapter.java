@@ -27,6 +27,11 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.PedidoView
         View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pedido_waiter, parent, false);
         return new PedidoViewHolder(vista);
     }
+    public void actualizarLista(List<Pedido> nuevosPedidos) {
+        pedidos.clear();
+        pedidos.addAll(nuevosPedidos);
+        notifyDataSetChanged();
+    }
 
     @Override
     public void onBindViewHolder(@NonNull PedidoViewHolder holder, int position) {

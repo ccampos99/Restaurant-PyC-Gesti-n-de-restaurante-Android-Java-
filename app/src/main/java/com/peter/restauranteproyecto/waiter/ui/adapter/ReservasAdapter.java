@@ -20,10 +20,17 @@ public class ReservasAdapter extends RecyclerView.Adapter<ReservasAdapter.Reserv
 
     private final List<Reserva> reservas;
     private final FragmentManager fragmentManager;
+    private final OnReservaAccionListener accionListener;
 
-    public ReservasAdapter(List<Reserva> reservas, FragmentManager fragmentManager) {
+    public interface OnReservaAccionListener {
+        void onActualizarEstado(String codigo, String nuevoEstado);
+        void onEliminarReserva(String codigo);
+    }
+
+    public ReservasAdapter(List<Reserva> reservas, FragmentManager fragmentManager, OnReservaAccionListener accionListener) {
         this.reservas = reservas;
         this.fragmentManager = fragmentManager;
+        this.accionListener = accionListener;
     }
 
     @NonNull
@@ -46,41 +53,21 @@ public class ReservasAdapter extends RecyclerView.Adapter<ReservasAdapter.Reserv
         holder.textEstado.setBackgroundResource(getBackgroundEstado(reserva.getEstado()));
         holder.textSolicitudes.setText(reserva.getSolicitudes().isEmpty() ? "-" : reserva.getSolicitudes());
 
-        // Botones visibles según estado
         holder.btnConfirmar.setVisibility(reserva.getEstado().equalsIgnoreCase("Pendiente") ? View.VISIBLE : View.GONE);
         holder.btnCancelar.setVisibility(reserva.getEstado().equalsIgnoreCase("Pendiente") ? View.VISIBLE : View.GONE);
         holder.btnCompletar.setVisibility(reserva.getEstado().equalsIgnoreCase("Confirmada") ? View.VISIBLE : View.GONE);
         holder.btnNoAsistio.setVisibility(reserva.getEstado().equalsIgnoreCase("Confirmada") ? View.VISIBLE : View.GONE);
 
-        // Eventos de acción (aquí puedes implementar lógicas reales)
-        holder.btnConfirmar.setOnClickListener(v -> {
-            reserva.setEstado("Confirmada");
-            notifyItemChanged(position);
-        });
-
-        holder.btnCancelar.setOnClickListener(v -> {
-            reserva.setEstado("Cancelada");
-            notifyItemChanged(position);
-        });
-
-        holder.btnCompletar.setOnClickListener(v -> {
-            reserva.setEstado("Completada");
-            notifyItemChanged(position);
-        });
-
-        holder.btnNoAsistio.setOnClickListener(v -> {
-            reserva.setEstado("No Asistió");
-            notifyItemChanged(position);
-        });
+        holder.btnConfirmar.setOnClickListener(v -> accionListener.onActualizarEstado(reserva.getCodigo(), "Confirmada"));
+        holder.btnCancelar.setOnClickListener(v -> accionListener.onActualizarEstado(reserva.getCodigo(), "Cancelada"));
+        holder.btnCompletar.setOnClickListener(v -> accionListener.onActualizarEstado(reserva.getCodigo(), "Completada"));
+        holder.btnNoAsistio.setOnClickListener(v -> accionListener.onActualizarEstado(reserva.getCodigo(), "No Asistió"));
 
         holder.btnEditar.setOnClickListener(v -> {
-            // Puedes abrir un diálogo de edición
+            // Pendiente implementar edición
         });
 
-        holder.btnEliminar.setOnClickListener(v -> {
-            reservas.remove(position);
-            notifyItemRemoved(position);
-        });
+        holder.btnEliminar.setOnClickListener(v -> accionListener.onEliminarReserva(reserva.getCodigo()));
     }
 
     @Override

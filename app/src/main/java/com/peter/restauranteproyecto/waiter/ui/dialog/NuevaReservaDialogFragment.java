@@ -10,12 +10,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.peter.restauranteproyecto.R;
+import com.peter.restauranteproyecto.common.data.DatabaseHelper;
 import com.peter.restauranteproyecto.common.model.Reserva;
 import com.peter.restauranteproyecto.common.interfaces.OnReservaCreadaListener;
 
@@ -27,9 +29,16 @@ import java.util.Locale;
 public class NuevaReservaDialogFragment extends DialogFragment {
 
     private OnReservaCreadaListener listener;
+    private DatabaseHelper dbHelper;
 
     public void setOnReservaCreadaListener(OnReservaCreadaListener listener) {
         this.listener = listener;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        dbHelper = new DatabaseHelper(requireContext());
     }
 
     @NonNull
@@ -47,10 +56,9 @@ public class NuevaReservaDialogFragment extends DialogFragment {
         Button btnCancelar = view.findViewById(R.id.btn_cancelar_reserva);
         Button btnGuardar = view.findViewById(R.id.btn_guardar_reserva);
 
-        // Configurar TimePicker en modo 24h
         timePicker.setIs24HourView(true);
 
-        // Meseros (dummy)
+        // Cargar meseros (dummy)
         String[] meseros = {"María García", "Carlos López", "Ana Martín", "Pedro Ruiz"};
         spinnerMesero.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_dropdown_item, meseros));
 
@@ -63,7 +71,6 @@ public class NuevaReservaDialogFragment extends DialogFragment {
             int comensales = Integer.parseInt(inputComensales.getText().toString().trim());
             String mesero = spinnerMesero.getSelectedItem().toString();
 
-            // Fecha y hora
             Calendar calendar = Calendar.getInstance();
             calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(),
                     timePicker.getHour(), timePicker.getMinute());
@@ -76,10 +83,17 @@ public class NuevaReservaDialogFragment extends DialogFragment {
             String estado = "Pendiente";
 
             Reserva nueva = new Reserva(codigo, cliente, fecha, hora, comensales, mesa, estado, solicitudes, mesero);
-            if (listener != null) {
-                listener.onReservaCreada(nueva);
+
+            boolean exito = dbHelper.insertarReserva(nueva);
+            if (exito) {
+                if (listener != null) {
+                    listener.onReservaCreada(nueva);
+                }
+                Toast.makeText(getContext(), "Reserva guardada exitosamente", Toast.LENGTH_SHORT).show();
+                dismiss();
+            } else {
+                Toast.makeText(getContext(), "Error al guardar la reserva", Toast.LENGTH_SHORT).show();
             }
-            dismiss();
         });
 
         Dialog dialog = new Dialog(requireContext());

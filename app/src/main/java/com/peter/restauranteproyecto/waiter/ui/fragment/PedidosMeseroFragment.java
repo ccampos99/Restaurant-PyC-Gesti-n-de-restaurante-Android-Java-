@@ -2,7 +2,6 @@ package com.peter.restauranteproyecto.waiter.ui.fragment;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,9 +14,8 @@ import android.widget.Spinner;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.peter.restauranteproyecto.R;
-import com.peter.restauranteproyecto.common.data.DataRepository;
+import com.peter.restauranteproyecto.common.data.DatabaseHelper;
 import com.peter.restauranteproyecto.common.model.Pedido;
-import com.peter.restauranteproyecto.common.viewmodel.DashboardViewModel;
 import com.peter.restauranteproyecto.waiter.ui.adapter.PedidoAdapter;
 import com.peter.restauranteproyecto.waiter.ui.dialog.NuevoPedidoDialogFragment;
 
@@ -27,35 +25,23 @@ import java.util.List;
 
 public class PedidosMeseroFragment extends Fragment {
 
+    private DatabaseHelper dbHelper;
     private List<Pedido> listaCompleta = new ArrayList<>();
     private PedidoAdapter adapter;
     private String estadoSeleccionado = "Todos los estados";
     private String prioridadSeleccionada = "Todas las prioridades";
+    private RecyclerView recyclerView;
 
-    public PedidosMeseroFragment() { }
+    public PedidosMeseroFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pedidos_waiter, container, false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_pedidos);
+        dbHelper = new DatabaseHelper(getContext());
+
+        recyclerView = view.findViewById(R.id.recycler_pedidos);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        // Inicializa datos de prueba
-        DataRepository.pedidos.clear();
-        DataRepository.pedidos.add(crearPedido("ORD-001", "Mesa 5", Arrays.asList("Paella Valenciana", "Gazpacho", "Sangría"), "Preparando", "14:30", 15, 32.50));
-        DataRepository.pedidos.add(crearPedido("ORD-002", "Mesa 3", Arrays.asList("Pulpo a la Gallega", "Vino Tinto"), "Pendiente", "14:45", 20, 18.00));
-        DataRepository.pedidos.add(crearPedido("ORD-003", "Mesa 8", Arrays.asList("Tarta de Santiago", "Café"), "Listo", "15:00", 5, 8.50));
-        DataRepository.pedidos.add(crearPedido("ORD-004", "Mesa 12", Arrays.asList("Jamón Ibérico", "Pan con Tomate", "Cerveza"), "Servido", "13:15", 12, 24.00));
-
-        listaCompleta = new ArrayList<>(DataRepository.pedidos);
-
-        new ViewModelProvider(requireActivity())
-                .get(DashboardViewModel.class)
-                .notificarActualizacion();
-
-        adapter = new PedidoAdapter(listaCompleta);
-        recyclerView.setAdapter(adapter);
 
         Spinner spinnerEstado = view.findViewById(R.id.spinner_estado);
         Spinner spinnerPrioridad = view.findViewById(R.id.spinner_prioridad);
@@ -71,7 +57,7 @@ public class PedidosMeseroFragment extends Fragment {
                 estadoSeleccionado = estados.get(position);
                 filtrarPedidos();
             }
-            @Override public void onNothingSelected(AdapterView<?> parent) { }
+            @Override public void onNothingSelected(AdapterView<?> parent) {}
         });
 
         spinnerPrioridad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -79,30 +65,27 @@ public class PedidosMeseroFragment extends Fragment {
                 prioridadSeleccionada = prioridades.get(position);
                 filtrarPedidos();
             }
-            @Override public void onNothingSelected(AdapterView<?> parent) { }
+            @Override public void onNothingSelected(AdapterView<?> parent) {}
         });
 
-        // Botón para nuevo pedido
         FloatingActionButton btnNuevoPedido = view.findViewById(R.id.btn_nuevo_pedido);
         btnNuevoPedido.setOnClickListener(v -> {
             NuevoPedidoDialogFragment dialog = new NuevoPedidoDialogFragment();
             dialog.setOnPedidoCreadoListener(nuevo -> {
-                listaCompleta.add(nuevo);
-                DataRepository.pedidos.add(nuevo);
-                filtrarPedidos();
+                dbHelper.insertarPedido(nuevo); // guarda en SQLite
+                cargarPedidos(); // vuelve a cargar todo
             });
             dialog.show(getParentFragmentManager(), "NuevoPedidoDialog");
         });
 
+        cargarPedidos(); // carga al iniciar
+
         return view;
     }
 
-    private Pedido crearPedido(String id, String mesa, List<String> articulos, String estado, String hora, int minutosRestantes, double total) {
-        String prioridad;
-        if (minutosRestantes <= 10) prioridad = "Alta";
-        else if (minutosRestantes <= 20) prioridad = "Media";
-        else prioridad = "Baja";
-        return new Pedido(id, mesa, articulos, estado, hora, minutosRestantes + " min", total, prioridad, "Pedro Ruiz");
+    private void cargarPedidos() {
+        listaCompleta = dbHelper.obtenerTodosLosPedidos();
+        filtrarPedidos();
     }
 
     private void filtrarPedidos() {
@@ -115,7 +98,6 @@ public class PedidosMeseroFragment extends Fragment {
             }
         }
         adapter = new PedidoAdapter(filtrados);
-        RecyclerView recyclerView = getView().findViewById(R.id.recycler_pedidos);
         recyclerView.setAdapter(adapter);
     }
 }

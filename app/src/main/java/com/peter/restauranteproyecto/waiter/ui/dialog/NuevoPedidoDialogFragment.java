@@ -1,5 +1,5 @@
 package com.peter.restauranteproyecto.waiter.ui.dialog;
-import android.app.Dialog;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +10,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 import com.peter.restauranteproyecto.R;
+import com.peter.restauranteproyecto.common.data.DatabaseHelper;
 import com.peter.restauranteproyecto.common.data.DataRepository;
 import com.peter.restauranteproyecto.common.model.Pedido;
 import com.peter.restauranteproyecto.common.model.Plato;
@@ -34,12 +35,11 @@ public class NuevoPedidoDialogFragment extends DialogFragment {
     }
 
     private OnPedidoCreadoListener listener;
+    private final List<String> articulosSeleccionados = new ArrayList<>();
 
     public void setOnPedidoCreadoListener(OnPedidoCreadoListener listener) {
         this.listener = listener;
     }
-
-    private final List<String> articulosSeleccionados = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class NuevoPedidoDialogFragment extends DialogFragment {
         Spinner spinnerPlatos = view.findViewById(R.id.spinner_platos);
         ImageButton btnAgregarArticulo = view.findViewById(R.id.btn_agregar_articulo);
         TextView textArticulosAgregados = view.findViewById(R.id.text_articulos_agregados);
-        Button btnGuardar = view.findViewById(R.id.btn_guardar); // <-- TU botón personalizado
+        Button btnGuardar = view.findViewById(R.id.btn_guardar);
         Button btnCancelar = view.findViewById(R.id.btn_cancelar);
 
         // Poblar spinner de meseros
@@ -71,7 +71,6 @@ public class NuevoPedidoDialogFragment extends DialogFragment {
 
         btnCancelar.setOnClickListener(v -> dismiss());
 
-        // Agregar artículo
         btnAgregarArticulo.setOnClickListener(v -> {
             String platoSeleccionado = spinnerPlatos.getSelectedItem().toString();
             articulosSeleccionados.add(platoSeleccionado);
@@ -95,7 +94,6 @@ public class NuevoPedidoDialogFragment extends DialogFragment {
             }
         });
 
-        // Guardar pedido
         btnGuardar.setOnClickListener(v -> {
             String codigo = "ORD-" + System.currentTimeMillis();
             String mesa = inputMesa.getText().toString().trim();
@@ -107,15 +105,20 @@ public class NuevoPedidoDialogFragment extends DialogFragment {
             String mesero = spinnerMesero.getSelectedItem().toString();
 
             Pedido nuevoPedido = new Pedido(codigo, mesa, articulosSeleccionados, estado, horaPedido, estimado, total, prioridad, mesero);
+
+            // Insertar en SQLite
+            DatabaseHelper dbHelper = new DatabaseHelper(getContext());
+            dbHelper.insertarPedido(nuevoPedido);
+
             if (listener != null) {
                 listener.onPedidoCreado(nuevoPedido);
             }
-            dismiss(); // Cierra el diálogo
+
+            dismiss();
         });
 
         return view;
     }
-
 
     private String calcularPrioridad(String estimado) {
         try {
