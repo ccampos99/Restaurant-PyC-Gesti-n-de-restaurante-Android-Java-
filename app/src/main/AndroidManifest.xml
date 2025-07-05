@@ -15,6 +15,7 @@
 
         <activity android:name=".cook.CookActivity" />
         <activity android:name=".waiter.WaiterActivity" />
+        <activity android:name=".cashier.CashierActivity" />
 
         <activity
             android:name=".main.MainActivity"
