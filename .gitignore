@@ -1,15 +1,37 @@
+# --- IDE / Gradle ---
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+.gradle/
+.idea/
 local.properties
+
+# --- SO ---
+.DS_Store
+Thumbs.db
+
+# --- Build outputs ---
+/build/
+# build del módulo app
+/app/build/
+
+# NDK / builds externos
+.cxx/
+.externalNativeBuild/
+
+# Capturas del emulador
+/captures/
+
+# --- Artefactos (no versionar binarios) ---
+*.apk
+*.ap_
+*.aab
+
+# --- Firmas y secretos (nunca al repo) ---
+*.jks
+*.keystore
+**/keystore.properties
+**/signing.properties
+
+/caches/
+/daemon/
+/wrapper/
+
